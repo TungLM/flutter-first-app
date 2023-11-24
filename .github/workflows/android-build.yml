@@ -28,3 +28,4 @@ jobs:
 
       - name: Run tests
         run: flutter test
+      - run: flutter build appbundle
