@@ -40,3 +40,8 @@ jobs:
          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}             
    
          keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: Upload Signed App Bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: signed-app-bundle
+          path: ${{steps.sign_app.outputs.signedReleaseFile}}
