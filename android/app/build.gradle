@@ -79,7 +79,7 @@ android {
     flavorDimensions "default"
 
     productFlavors {
-        Dev {
+        dev {
             dimension "default"
             resValue "string", "app_name", "dev first app"
             applicationIdSuffix ".dev"
