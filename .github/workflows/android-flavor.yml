@@ -25,7 +25,7 @@ jobs:
 
       - name: Run tests
         run: flutter test
-      - run: flutter build apk --flavor=Prod
+      - run: flutter build apk --flavor=Dev
       - name: Sign App Bundle
         uses: r0adkll/sign-android-release@v1   
         id: sign_app
