@@ -23,19 +23,19 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-#      - name: Configure Keystore
-#        run: |
-#          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
-#          echo "storeFile=upload-keystore.jks" >> key.properties
-#          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-#          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-#          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-#        env:
-#          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
-#          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
-#          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-#          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-#        working-directory: android
+      - name: Configure Keystore
+        run: |
+          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
+          echo "storeFile=upload-keystore.jks" >> key.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+        env:
+          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+        working-directory: android
 
       - run: flutter build appbundle --flavor dev
   #    - name: Sign App Bundle
@@ -54,12 +54,12 @@ jobs:
         with:
           name: signed-apk
           path: build/app/outputs/bundle/devRelease/app-dev-release.aab
-      #- name: Upload to Play Store (Internal Testing)
-       # uses: r0adkll/upload-google-play@v1.0.18
-        #with:
-         # serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
-         # packageName: com.tung.first_app.dev
-         # releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}        
-         # mappingFile: ./build/app/outputs/mapping/release/mapping.txt
-         # track: internal
-         # status: completed
+      - name: Upload to Play Store (Internal Testing)
+        uses: r0adkll/upload-google-play@v1.0.18
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
+          packageName: com.tung.first_app.dev
+          releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}        
+          mappingFile: ./build/app/outputs/mapping/DevRelease/mapping.txt
+          track: internal
+          status: completed
