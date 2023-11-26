@@ -41,12 +41,12 @@ jobs:
    
          keyPassword: ${{ secrets.KEY_PASSWORD }}
       
-      - name: Upload to Play Store (Internal Testing)
-        uses: r0adkll/upload-google-play@v1.0.18
-        with:
-          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
-          packageName: com.tung.first_app
-          releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}        
-          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
-          track: internal
-          status: draft
+   #   - name: Upload to Play Store (Internal Testing)
+    #    uses: r0adkll/upload-google-play@v1.0.18
+    #    with:
+    #      serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
+    #      packageName: com.tung.first_app
+    #      releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}        
+    #      mappingFile: ./build/app/outputs/mapping/release/mapping.txt
+    #      track: internal
+     #     status: draft
