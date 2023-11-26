@@ -22,23 +22,20 @@ jobs:
       - run: flutter --version
       - name: Install dependencies
         run: flutter pub get
-      - name: Clean Gradle Cache
-        run: |
-          rm -rf $HOME/.gradle/caches/
 
-      - name: Configure Keystore
-        run: |
-          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
-          echo "storeFile=upload-keystore.jks" >> key.properties
-          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-        env:
-          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
-          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-        working-directory: android
+#      - name: Configure Keystore
+#        run: |
+#          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
+#          echo "storeFile=upload-keystore.jks" >> key.properties
+#          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+#          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+#          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+#        env:
+#          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
+#          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
+#          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+#          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+#        working-directory: android
 
       - run: flutter build appbundle --flavor Prod
 #      - name: Sign App Bundle
