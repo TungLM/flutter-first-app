@@ -37,7 +37,7 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
         working-directory: android
 
-      - run: flutter build appbundle --flavor Dev -t lib/main.dart
+      - run: flutter build apk --flavor Prod
 #      - name: Sign App Bundle
 #        uses: r0adkll/sign-android-release@v1
 #        id: sign_app
