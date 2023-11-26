@@ -23,32 +23,32 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Configure Keystore
-        run: |
-          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
-          echo "storeFile=upload-keystore.jks" >> key.properties
-          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-        env:
-          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
-          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-        working-directory: android
+   #   - name: Configure Keystore
+   #     run: |
+   #       echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
+   #       echo "storeFile=upload-keystore.jks" >> key.properties
+   #       echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+   #       echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+   #       echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+   #     env:
+   #       PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
+   #       KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
+   #       KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+   #       KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+   #     working-directory: android
 
+      - name: Sign App Bundle
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+         releaseDirectory: build/app/outputs/bundle/devRelease
+         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+         alias: ${{ secrets.ALIAS }}
+         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+         keyPassword: ${{ secrets.KEY_PASSWORD }}
+         
       - run: flutter build appbundle --flavor dev
-  #    - name: Sign App Bundle
-  #      uses: r0adkll/sign-android-release@v1
-  #      id: sign_app
-  #      with:
-  #       releaseDirectory: build/app/outputs/bundle/release/
-  #       signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-  #       alias: ${{ secrets.ALIAS }}
-  #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-
-   #      keyPassword: ${{ secrets.KEY_PASSWORD }}
-
+      
       - name: Upload Signed App Bundle
         uses: actions/upload-artifact@v3
         with:
@@ -59,7 +59,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
           packageName: com.tung.first_app.dev
-          releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}        
+          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
           mappingFile: ./build/app/outputs/mapping/DevRelease/mapping.txt
           track: internal
           status: completed
