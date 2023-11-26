@@ -65,6 +65,7 @@ android {
         Dev {
             dimension "default"
             resValue "string", "app_name", "dev first app"
+            applicationIdSuffix ".dev"
         }
 
         Prod {
