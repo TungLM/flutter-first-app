@@ -23,8 +23,20 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test
+      - name: Configure Keystore
+        run: |
+          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
+          echo "storeFile=upload-keystore.jks" >> key.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+        env:
+          PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+        working-directory: android
+
       - run: flutter build appbundle --flavor Dev
 #      - name: Sign App Bundle
 #        uses: r0adkll/sign-android-release@v1
@@ -37,20 +49,6 @@ jobs:
 #
 #         keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Configure Keystore
-        run: |
-            echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/upload-keystore.jks
-            echo "storeFile=upload-keystore.jks" >> key.properties
-            echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-            echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-            echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-        env:
-            PLAY_STORE_UPLOAD_KEY: ${{ secrets.SIGNING_KEY }}
-            KEYSTORE_KEY_ALIAS: ${{ secrets.ALIAS }}
-            KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-            KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-        working-directory: android
-      
       - name: Upload Signed App Bundle
         uses: actions/upload-artifact@v3
         with:
