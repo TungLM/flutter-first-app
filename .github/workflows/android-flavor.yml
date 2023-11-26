@@ -37,6 +37,8 @@ jobs:
    #       KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
    #     working-directory: android
 
+      - run: flutter build appbundle --flavor dev
+
       - name: Sign App Bundle
         uses: r0adkll/sign-android-release@v1
         id: sign_app
@@ -46,8 +48,6 @@ jobs:
          alias: ${{ secrets.ALIAS }}
          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
          keyPassword: ${{ secrets.KEY_PASSWORD }}
-         
-      - run: flutter build appbundle --flavor dev
       
       - name: Upload Signed App Bundle
         uses: actions/upload-artifact@v3
