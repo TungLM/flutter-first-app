@@ -38,22 +38,22 @@ jobs:
 #        working-directory: android
 
       - run: flutter build appbundle --flavor dev
-      - name: Sign App Bundle
-        uses: r0adkll/sign-android-release@v1
-        id: sign_app
-        with:
-         releaseDirectory: build/app/outputs/bundle/release/
-         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-         alias: ${{ secrets.ALIAS }}
-         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+  #    - name: Sign App Bundle
+  #      uses: r0adkll/sign-android-release@v1
+  #      id: sign_app
+  #      with:
+  #       releaseDirectory: build/app/outputs/bundle/release/
+  #       signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+  #       alias: ${{ secrets.ALIAS }}
+  #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
-         keyPassword: ${{ secrets.KEY_PASSWORD }}
+   #      keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Upload Signed App Bundle
         uses: actions/upload-artifact@v3
         with:
           name: signed-apk
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          path: build/app/outputs/bundle/devRelease/app-dev-release.aab
       #- name: Upload to Play Store (Internal Testing)
        # uses: r0adkll/upload-google-play@v1.0.18
         #with:
