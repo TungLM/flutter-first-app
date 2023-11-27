@@ -25,16 +25,15 @@ jobs:
 
       # Setup Ruby, Bundler, and Gemfile dependencies
       - name: Setup Fastlane
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.6"
+          ruby-version: "23.2"
           bundler-cache: true
-          working-directory: android
       
-      - name: Install bundle
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+     # - name: Install bundle
+     #   run: |
+     #     bundle config path vendor/bundle
+     #     bundle install --jobs 4 --retry 3
 
       - name: Configure Keystore
         run: |
