@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build Android flavor
+name: Build Android fastlane
 
 on:
   workflow_dispatch:
