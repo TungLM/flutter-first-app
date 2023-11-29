@@ -70,7 +70,7 @@ jobs:
      #     name: signed-apk
      #     path: build/app/outputs/bundle/devRelease/app-dev-release.aab
       - name: Upload to Play Store (Internal Testing)
-        uses: r0adkll/upload-google-play@v1.0.18
+        uses: r0adkll/upload-google-play@v1.1.2
         with:
           #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
           serviceAccountJson: play_config.json
