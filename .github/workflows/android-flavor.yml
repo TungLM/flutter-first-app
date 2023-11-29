@@ -78,7 +78,6 @@ jobs:
           releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
           track: beta
-          userFraction: 1
           #status: draft
     #  - run: bundle exec fastlane beta
     #    env:
