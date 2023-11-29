@@ -79,6 +79,7 @@ jobs:
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
           track: beta
           userFraction: 0.9
+          inAppUpdatePriority: 5
           status: inProgress
           #status: draft
     #  - run: bundle exec fastlane beta
