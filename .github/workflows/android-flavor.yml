@@ -78,7 +78,6 @@ jobs:
           releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
           track: internal
-          inAppUpdatePriority: 3
 
           #status: draft
     #  - run: bundle exec fastlane beta
