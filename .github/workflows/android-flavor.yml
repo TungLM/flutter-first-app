@@ -77,8 +77,7 @@ jobs:
           packageName: com.tung.first_app.dev
           releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
-          track: beta
-          changesNotSentForReview: true
+          track: internal
 
           #status: draft
     #  - run: bundle exec fastlane beta
