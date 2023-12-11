@@ -52,7 +52,7 @@ jobs:
         env:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
 
-      - run: flutter build appbundle --flavor dev
+      - run: flutter build apk --flavor dev --build-name 1.1.1 --build-number ${{ vars.BUILD_NUMBER }}  
 #
   #    - name: Sign App Bundle
   #      uses: r0adkll/sign-android-release@v1
@@ -64,21 +64,21 @@ jobs:
   #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
   #       keyPassword: ${{ secrets.KEY_PASSWORD }}
       
-  #    - name: Upload Signed App Bundle
-   #     uses: actions/upload-artifact@v3
-    #    with:
-     #     name: signed-apk
-     #     path: build/app/outputs/bundle/devRelease/app-dev-release.aab
-      - name: Upload to Play Store (Internal Testing)
-        uses: r0adkll/upload-google-play@v1.1.2
+      - name: Upload Signed App Bundle
+        uses: actions/upload-artifact@v3
         with:
-          #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
-          serviceAccountJson: play_config.json
-          packageName: com.tung.first_app.dev
-          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
-          mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
-          track: internal
-          changesNotSentForReview: true
+          name: signed-apk
+          path: build/app/outputs/flutter-apk/app-dev-release.apk
+  #    - name: Upload to Play Store (Internal Testing)
+ #       uses: r0adkll/upload-google-play@v1.1.2
+ #       with:
+  #        #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
+  #        serviceAccountJson: play_config.json
+   #       packageName: com.tung.first_app.dev
+   #       releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
+   #       mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
+   #       track: internal
+   #       changesNotSentForReview: true
 
           #status: draft
     #  - run: bundle exec fastlane beta
