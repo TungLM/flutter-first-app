@@ -18,7 +18,6 @@ jobs:
         uses: antifree/json-to-variables@v1.1.1
         with:
           filename: 'configs/version.json'
-          prefix: 'build'
       - name: Show output
         run: echo "The time was ${{ env.VersionName }}, ${{ env.VersionCode }}, = ${{github.run_number}}"
 
