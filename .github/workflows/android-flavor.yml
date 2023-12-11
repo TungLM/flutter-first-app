@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: JSON to variables
-        uses: rgarcia-phi/json-to-variables@v1.1.0
+        uses: antifree/json-to-variables@v1.1.1
         with:
           filename: 'configs/version.json'
           prefix: 'build'
