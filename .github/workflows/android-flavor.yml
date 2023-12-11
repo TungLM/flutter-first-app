@@ -17,10 +17,10 @@ jobs:
       - name: JSON to variables
         uses: rgarcia-phi/json-to-variables@v1.1.0
         with:
-          filename: 'lib/version.json'
+          filename: 'configs/version.json'
           prefix: 'build'
       - name: Show output
-        run: echo "The time was ${{ env.build_name }}, ${{ env.build_code }}"
+        run: echo "The time was ${{ env.build_version_name }}, ${{ env.build_version_code }}"
 
       - uses: subosito/flutter-action@v2
         with:
@@ -60,7 +60,7 @@ jobs:
         env:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
 
-      - run: flutter build apk --flavor dev --build-name ${{ env.BUILD_NAME }} --build-number ${{ env.BUILD_NUMBER }}  
+      - run: flutter build apk --flavor dev --build-name ${{ env.build_version_name }} --build-number ${{ env.build_version_code }}  
 #
   #    - name: Sign App Bundle
   #      uses: r0adkll/sign-android-release@v1
