@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,19 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) async {
+  Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-String appName = packageInfo.appName;
-String packageName = packageInfo.packageName;
-String version = packageInfo.version;
-String buildNumber = packageInfo.buildNumber;
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -92,7 +86,7 @@ String buildNumber = packageInfo.buildNumber;
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("${widget.title} = $version == $buildNumber"),
+        title: Text("${widget.title}"),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
