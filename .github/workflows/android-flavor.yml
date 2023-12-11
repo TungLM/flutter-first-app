@@ -14,6 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Read package.json
+        id: package
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./app_info.json
+      - name: Echo package.json
+        run: echo "${{ steps.package.outputs.content }}"
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.13.9'
