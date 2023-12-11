@@ -20,7 +20,7 @@ jobs:
           filename: 'configs/version.json'
           prefix: 'build'
       - name: Show output
-        run: echo "The time was ${{ env.build_version_name }}, ${{ env.build_version_code }}"
+        run: echo "The time was ${{ env.buildVersionName }}, ${{ env.buildVersionCode }}"
 
       - uses: subosito/flutter-action@v2
         with:
