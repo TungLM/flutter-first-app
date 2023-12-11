@@ -17,10 +17,10 @@ jobs:
       - name: JSON to variables
         uses: antifree/json-to-variables@v1.0.1
         with:
-          filename: 'app_json.json'
-          #prefix: 'test'
+          filename: './app_json.json'
+          prefix: 'build'
       - name: Show output
-        run: echo "The time was ${{ env.buildName }}, ${{ env.buildNumber }}"
+        run: echo "The time was ${{ env.build_name }}, ${{ env.build_number }}"
 
       - uses: subosito/flutter-action@v2
         with:
