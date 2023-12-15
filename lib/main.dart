@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String code = "";
 
   void _incrementCounter() async {
-    final info = await PackageInfo.fromPlatform();
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -69,8 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      name = info.version;
-      code = info.buildNumber;
     });
   }
   
