@@ -9,4 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: invertase/github-action-dart-analyzer@v1
+      - uses: dart-lang/setup-dart@v1.6.0
+
+      - uses: invertase/github-action-dart-analyzer@v2.0.0
