@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'tlm You have pushed the button this many times: $name === $code',
             ),
             Text(
-              '$_counter',
+              '$_counter $b',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
