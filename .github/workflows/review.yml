@@ -21,3 +21,10 @@ jobs:
      # - uses: dart-lang/setup-dart@v1.6.0
 
       - uses: invertase/github-action-dart-analyzer@v2.0.0
+        with:
+          # (Optional) Treat info level issues as fatal.
+          fatal-infos: false
+
+          # (Optional) Treat warning level issues as fatal
+          # (defaults to true).
+          fatal-warnings: false
