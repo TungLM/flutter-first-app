@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:axon_ivy/presentation/util/resources/routes_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -118,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'tlm You have pushed the button this many times: $name === $code',
             ),
             Text(
-              '$_counter $b',
+              '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
