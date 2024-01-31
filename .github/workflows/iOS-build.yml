@@ -6,17 +6,6 @@ jobs:
   build:
     runs-on: macos-13
     steps:
-    
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.13.9'
-          channel: 'stable'
-          cache: true
-      - name: Install dependencies
-        run: flutter pub get
       - name: Install the Apple certificate and provisioning profile
         env:
           P12_DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.IOS_P12_BASE64 }}
@@ -41,5 +30,15 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PROVISIONING_PROFILE_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.9'
+          channel: 'stable'
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
       - name: Build iOS release
         run: flutter build ios --release --no-codesign
