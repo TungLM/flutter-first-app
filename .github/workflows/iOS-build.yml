@@ -32,6 +32,11 @@ jobs:
           cp $PROVISIONING_PROFILE_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       - name: Checkout Repository
         uses: actions/checkout@v3
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
