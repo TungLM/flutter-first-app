@@ -23,7 +23,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           echo "password=$KEY_PASSWORD" >> user.properties
-        working-directory: config
+        working-directory: configs
 
       - uses: subosito/flutter-action@v2
         with:
