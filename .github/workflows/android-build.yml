@@ -40,7 +40,7 @@ jobs:
           name: APK(s) debug generated
           path: build/app/outputs/apk/debug/
       #- name: Sign App Bundle
-      ##  uses: r0adkll/sign-android-release@v1   
+      #  uses: r0adkll/sign-android-release@v1   
        # id: sign_app
        # with:
        #  releaseDirectory: build/app/outputs/bundle/release/
