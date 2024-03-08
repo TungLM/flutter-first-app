@@ -21,6 +21,9 @@ jobs:
       - name: Login to App
         env:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          echo "password=$KEY_PASSWORD" >> user.properties
+        working-directory: config
 
       - uses: subosito/flutter-action@v2
         with:
