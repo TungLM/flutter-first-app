@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String name = "";
   String code = "";
-
+  String username = String.fromEnvironment('KEY_PASSWORD');
   void _incrementCounter() async {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'tlm You have pushed the button this many times: $name === $code',
+              'tlm You have pushed the button this many times: $username === $code',
             ),
             Text(
               '$_counter',
