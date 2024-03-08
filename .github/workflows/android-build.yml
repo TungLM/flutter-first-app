@@ -18,6 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Login to App
+        env:
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.13.9'
@@ -29,17 +33,22 @@ jobs:
 
       - name: Run tests
         run: flutter test
-      - run: flutter build appbundle
-      - name: Sign App Bundle
-        uses: r0adkll/sign-android-release@v1   
-        id: sign_app
+      - run: flutter build apk --debug
+      - name: Upload APK Debug
+        uses: actions/upload-artifact@v4
         with:
-         releaseDirectory: build/app/outputs/bundle/release/
-         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-         alias: ${{ secrets.ALIAS }}         
-         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}             
+          name: APK(s) debug generated
+          path: build/app/outputs/apk/debug/
+      #- name: Sign App Bundle
+      ##  uses: r0adkll/sign-android-release@v1   
+       # id: sign_app
+       # with:
+       #  releaseDirectory: build/app/outputs/bundle/release/
+       #  signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+       #  alias: ${{ secrets.ALIAS }}         
+       #  keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}             
    
-         keyPassword: ${{ secrets.KEY_PASSWORD }}
+       #  keyPassword: ${{ secrets.KEY_PASSWORD }}
       
    #   - name: Upload to Play Store (Internal Testing)
     #    uses: r0adkll/upload-google-play@v1.0.18
