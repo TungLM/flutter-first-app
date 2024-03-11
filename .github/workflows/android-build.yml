@@ -34,7 +34,6 @@ jobs:
           DEMO_URL: ${{ secrets.KEY_DEMO_URL }}
           DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
           DEMO_PASSWORD: ${{ secrets.KEY_DEMO_PASSWORD }}
-        working-directory: assets
 
       - uses: subosito/flutter-action@v2
         with:
