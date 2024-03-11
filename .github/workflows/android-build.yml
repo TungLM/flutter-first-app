@@ -27,9 +27,9 @@ jobs:
 
       - name: Demo user
         run: |
-          echo "DEMO_URL=DEMO_URL" >> assets/env/.demo
-          echo "DEMO_USER_NAME=DEMO_USER_NAME" >> assets/env/.demo
-          echo "DEMO_PASSWORD=DEMO_PASSWORD" >> assets/env/.demo
+          echo "DEMO_URL=DEMO_URL" >> assets/env/.test
+          echo "DEMO_USER_NAME=DEMO_USER_NAME" >> assets/env/.test
+          echo "DEMO_PASSWORD=DEMO_PASSWORD" >> assets/env/.test
         env:
           DEMO_URL: ${{ secrets.KEY_DEMO_URL }}
           DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
