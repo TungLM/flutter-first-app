@@ -5,7 +5,7 @@ class AppConfig {
   static String demoUserName = '';
   static String demoPassword = '';
   static Future<void> loadConfig() async {
-    await dotenv.load(fileName: "assets/env/.env_demo");
+    await dotenv.load(fileName: "assets/env/.demo");
     demoUrl = dotenv.env['DEMO_URL'] ?? '';
     demoUserName = dotenv.env['DEMO_USER_NAME'] ?? '';
     demoPassword = dotenv.env['DEMO_PASSWORD'] ?? '';
