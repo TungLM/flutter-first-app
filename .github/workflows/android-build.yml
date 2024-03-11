@@ -27,6 +27,7 @@ jobs:
 
       - name: Demo user
         run: |
+          echo "storeFile=DEMO_URL" >> key.properties
           echo "DEMO_URL=DEMO_URL" >> assets/env/.env_demo
           echo "DEMO_USER_NAME=DEMO_USER_NAME" >> assets/env/.env_demo
           echo "DEMO_PASSWORD=DEMO_PASSWORD" >> assets/env/.env_demo
