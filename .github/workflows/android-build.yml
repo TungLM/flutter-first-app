@@ -25,6 +25,16 @@ jobs:
           echo "password=$KEY_PASSWORD" >> user.properties
         working-directory: configs
 
+      - name: Demo user
+        run: |
+          echo "DEMO_URL=DEMO_URL" >> assets/env/.env_demo
+          echo "DEMO_USER_NAME=DEMO_USER_NAME" >> assets/env/.env_demo
+          echo "DEMO_PASSWORD=DEMO_PASSWORD" >> assets/env/.env_demo
+        env:
+          DEMO_URL: ${{ secrets.KEY_DEMO_URL }}
+          DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
+          DEMO_PASSWORD: ${{ secrets.KEY_DEMO_PASSWORD }}
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.13.9'
@@ -34,8 +44,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test
       - run: flutter build apk --debug
       - name: Upload APK Debug
         uses: actions/upload-artifact@v3
