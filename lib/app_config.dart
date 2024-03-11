@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppConfig {
@@ -5,10 +6,12 @@ class AppConfig {
   static String demoUserName = '';
   static String demoPassword = '';
   static Future<void> loadConfig() async {
-    await dotenv.load(fileName: "assets/env/.test");
-    demoUrl = dotenv.env['demoUrl'] ?? '';
-    demoUserName = dotenv.env['demoUserName'] ?? '';
-    demoPassword = dotenv.env['demoPassword'] ?? '';
+    if(kReleaseMode) {
+      await dotenv.load(fileName: "assets/env/.test");
+      demoUrl = dotenv.env['demoUrl'] ?? '';
+      demoUserName = dotenv.env['demoUserName'] ?? '';
+      demoPassword = dotenv.env['demoPassword'] ?? '';
+    }
   }
   //DEMO_URL=http://127.0.0.1:8081/api
 // DEMO_USER_NAME=demo
