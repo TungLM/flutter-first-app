@@ -51,7 +51,7 @@ jobs:
         env:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
 
-      - run: flutter build appbundle --flavor dev --build-number ${{github.run_number}}
+      - run: flutter build appbundle --build-number ${{github.run_number}}
       #
       #    - name: Sign App Bundle
       #      uses: r0adkll/sign-android-release@v1
