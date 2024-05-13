@@ -63,21 +63,21 @@ jobs:
       #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
       #       keyPassword: ${{ secrets.KEY_PASSWORD }}
 
-      #    - name: Upload Signed App Bundle
-      #     uses: actions/upload-artifact@v3
-      #    with:
-      #     name: signed-apk
-      #     path: build/app/outputs/bundle/devRelease/app-dev-release.aab
-      - name: Upload to Play Store (Internal Testing)
-        uses: r0adkll/upload-google-play@v1.1.2
+      - name: Upload Signed App Bundle
+        uses: actions/upload-artifact@v3
         with:
-          #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
-          serviceAccountJson: play_config.json
-          packageName: com.tung.first_app.dev
-          releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
-          track: internal
-          changesNotSentForReview: true
+          name: signed-app
+          path: build/app/outputs/bundle/release/app-release.aab
+
+#      - name: Upload to Play Store (Internal Testing)
+#        uses: r0adkll/upload-google-play@v1.1.2
+#        with:
+#          serviceAccountJson: play_config.json
+#          packageName: com.tung.first_app.dev
+#          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+#          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
+#          track: internal
+#          changesNotSentForReview: true
 
           #status: draft
     #  - run: bundle exec fastlane beta
