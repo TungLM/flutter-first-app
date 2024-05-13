@@ -74,8 +74,8 @@ jobs:
           #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
           serviceAccountJson: play_config.json
           packageName: com.tung.first_app.dev
-          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
-          mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
           track: internal
           changesNotSentForReview: true
 
