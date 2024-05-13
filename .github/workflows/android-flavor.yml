@@ -69,15 +69,15 @@ jobs:
           name: signed-app
           path: build/app/outputs/bundle/release/app-release.aab
 
-#      - name: Upload to Play Store (Internal Testing)
-#        uses: r0adkll/upload-google-play@v1.1.2
-#        with:
-#          serviceAccountJson: play_config.json
-#          packageName: com.tung.first_app.dev
-#          releaseFiles: build/app/outputs/bundle/release/app-release.aab
-#          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
-#          track: internal
-#          changesNotSentForReview: true
+      - name: Upload to Play Store (Internal Testing)
+        uses: r0adkll/upload-google-play@v1.1.2
+        with:
+          serviceAccountJson: play_config.json
+          packageName: com.tung.first_app.dev
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
+          track: internal
+          changesNotSentForReview: true
 
           #status: draft
     #  - run: bundle exec fastlane beta
