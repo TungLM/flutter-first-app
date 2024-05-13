@@ -14,16 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: JSON to variables
-        uses: antifree/json-to-variables@v1.1.1
-        with:
-          filename: 'configs/version.json'
-      - name: Show output
-        run: echo "The time was ${{ env.VersionName }}, ${{ env.VersionCode }}, = ${{github.run_number}}"
-
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.2'
           channel: 'stable'
           cache: true
       - run: flutter --version
@@ -31,12 +23,12 @@ jobs:
         run: flutter pub get
 
       # Setup Ruby, Bundler, and Gemfile dependencies
-  #    - name: Setup Fastlane
-  #      uses: ruby/setup-ruby@54a18e26dbbb1eabc604f317ade9a5788dddef81 # v1.159.0
-  #      with:
-  #        ruby-version: "2.6"
-  #        bundler-cache: true
-  #        working-directory: android
+      #    - name: Setup Fastlane
+      #      uses: ruby/setup-ruby@54a18e26dbbb1eabc604f317ade9a5788dddef81 # v1.159.0
+      #      with:
+      #        ruby-version: "2.6"
+      #        bundler-cache: true
+      #        working-directory: android
 
       - name: Configure Keystore
         run: |
@@ -59,33 +51,33 @@ jobs:
         env:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON }}
 
-      - run: flutter build apk --flavor dev --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}  
-#
-  #    - name: Sign App Bundle
-  #      uses: r0adkll/sign-android-release@v1
-  #      id: sign_app
-  #      with:
-  #       releaseDirectory: build/app/outputs/bundle/devRelease
-  #       signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-  #       alias: ${{ secrets.ALIAS }}
-  #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-  #       keyPassword: ${{ secrets.KEY_PASSWORD }}
-      
-      - name: Upload Signed App Bundle
-        uses: actions/upload-artifact@v3
+      - run: flutter build appbundle --flavor dev --build-number ${{github.run_number}}
+      #
+      #    - name: Sign App Bundle
+      #      uses: r0adkll/sign-android-release@v1
+      #      id: sign_app
+      #      with:
+      #       releaseDirectory: build/app/outputs/bundle/devRelease
+      #       signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+      #       alias: ${{ secrets.ALIAS }}
+      #       keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+      #       keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      #    - name: Upload Signed App Bundle
+      #     uses: actions/upload-artifact@v3
+      #    with:
+      #     name: signed-apk
+      #     path: build/app/outputs/bundle/devRelease/app-dev-release.aab
+      - name: Upload to Play Store (Internal Testing)
+        uses: r0adkll/upload-google-play@v1.1.2
         with:
-          name: signed-apk
-          path: build/app/outputs/flutter-apk/app-dev-release.apk
-  #    - name: Upload to Play Store (Internal Testing)
- #       uses: r0adkll/upload-google-play@v1.1.2
- #       with:
-  #        #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
-  #        serviceAccountJson: play_config.json
-   #       packageName: com.tung.first_app.dev
-   #       releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab       
-   #       mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
-   #       track: internal
-   #       changesNotSentForReview: true
+          #serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
+          serviceAccountJson: play_config.json
+          packageName: com.tung.first_app.dev
+          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
+          mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
+          track: internal
+          changesNotSentForReview: true
 
           #status: draft
     #  - run: bundle exec fastlane beta
